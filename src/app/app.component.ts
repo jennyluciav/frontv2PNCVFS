@@ -27,7 +27,7 @@ export class AppComponent implements OnInit{
   @ViewChild('codserv') codserv: any;
   @ViewChild('codano') codano: any;
 
-  isShow: boolean = true;
+  isShow: boolean = false;
 
   title = 'app';
   dpto: any;prov:any;dist:any;cenp:any;serv:any;groups: any;ano: any;
