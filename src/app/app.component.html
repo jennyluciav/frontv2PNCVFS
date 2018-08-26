@@ -1,0 +1,224 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="main-container">
+  <nav id="main-nav" class="navbar navbar-expand-lg navbar-light bg-light" style="padding: 0rem;">
+    <a class="navbar-brand" href="#" style="padding: 0px;"><img style="padding: 0rem 0rem 0rem 1rem;" src="assets/images/logo.PNG" alt="PNCVFS"></a>
+    <div> Visita Nro: <span id="contador"></span> </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarMain">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">
+            <img class="icon-1" style="height: 25px;" src="assets/images/grawogrey.png" alt="PNCVFS">
+            <img class="icon-2" style="height: 25px;" src="assets/images/grawowhit.png" alt="PNCVFS">
+          </a>
+        <span class="hidden-sm hidden-md hidden-lg">Ver estadisticas y Mapa</span>
+      </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <img class="icon-1" style="height: 25px;" src="assets/images/wogrey.png" alt="PNCVFS">
+            <img class="icon-2" style="height: 25px;" src="assets/images/wowhit.png" alt="PNCVFS">
+          </a>
+          <span class="hidden-sm hidden-md hidden-lg">Ver Mapa</span>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- <div class="row">
+    <div class="col-sm-12">
+      <div class="col-sm-3 pull-left" style="padding: 1.5rem 0rem 1.5rem 0rem">
+        <div style="height: 45px;"><img src="assets/images/logo.PNG" alt="PNCVFS"></div>
+      </div>
+      <div class="col-xs-1 pull-right select-type" style="padding: 1.5rem 0rem 1.5rem 0rem">
+        <div style="height: 45px;display: flex;align-items: center;justify-content: center;"><img src="assets/images/gragrey.png" alt="PNCVFS"></div>
+      </div>
+      <div class="col-xs-1 pull-right select-type estadisticas" style="padding: 1.5rem 0rem 1.5rem 0rem">
+        <div (click)="irEstadisticas()" style="height: 45px;display: flex;align-items: center;justify-content: center;"><img src="assets/images/grawogrey.png" alt="PNCVFS"></div>
+      </div>
+      <div class="col-xs-1 pull-right select-type" style="padding: 1.5rem 0rem 1.5rem 0rem">
+        <div (click)="irHome()" style="height: 45px;display: flex;align-items: center;justify-content: center;"><img src="assets/images/wogrey.png" alt="PNCVFS"></div>
+      </div>
+    </div>
+  </div> -->
+  <div style="background: rgba(12,13,14,0.1); padding: 1.5rem;">
+    <div class="row">
+      <div class="col-md col-xs-12">
+        <select class="form-control"  (change)="getProv()" #coddpto>
+          <option value="00">Departamento</option>
+          <ng-container *ngFor="let dep of dpto">
+            <option value="{{dep.coddpto}}">{{dep.descripcion}}</option>
+          </ng-container>
+        </select>
+      </div>
+      <div class="col-md col-xs-12">
+        <select class="form-control"  (change)="getDist()" #codprov>
+          <option value="00">Provincia</option>
+          <ng-container *ngFor="let pr of prov">
+            <option value="{{pr.codprov}}">{{pr.descripcion}}</option>
+          </ng-container>
+        </select>
+      </div>
+      <div class="col-md col-xs-12">
+        <select class="form-control"  (change)="getCenP()" #coddist>
+          <option value="00">Distrito</option>
+          <ng-container *ngFor="let di of dist">
+            <option value="{{di.coddist}}">{{di.descripcion}}</option>
+          </ng-container>
+        </select>
+      </div>
+      <div class="col-md col-xs-12">
+        <select class="form-control"  (change)="getServicios()"  #codcenp>
+          <option value="0000">Centro Poblado</option>
+          <ng-container *ngFor="let ce of cenp">
+            <option value="{{ce.codcenp}}">{{ce.descripcion}}</option>
+          </ng-container>
+        </select>
+      </div>
+      <div class="col-md col-xs-12">
+        <select class="form-control" (change)="redibujarMarcadores()" #codserv>
+          <option value="00">Servicio</option>
+        </select>
+      </div>
+      <div class="col-md col-xs-12">
+        <select class="form-control" (change)="getServicios()" #codano>
+            <option value="00">Año</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="row">
+    <div class="col-sm-12" style="background: rgba(12,13,14,0.1); padding: 1.5rem 0rem 1.5rem 0rem">
+      <div class="col-md-2">
+        <select class="form-control"  (change)="getProv()" #coddpto>
+          <option value="00">Departamento</option>
+          <ng-container *ngFor="let dep of dpto">
+            <option value="{{dep.coddpto}}">{{dep.descripcion}}</option>
+          </ng-container>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <select class="form-control"  (change)="getDist()" #codprov>
+          <option value="00">Provincia</option>
+          <ng-container *ngFor="let pr of prov">
+            <option value="{{pr.codprov}}">{{pr.descripcion}}</option>
+          </ng-container>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <select class="form-control"  (change)="getCenP()" #coddist>
+          <option value="00">Distrito</option>
+          <ng-container *ngFor="let di of dist">
+            <option value="{{di.coddist}}">{{di.descripcion}}</option>
+          </ng-container>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <select class="form-control"  (change)="getServicios()"  #codcenp>
+          <option value="0000">Centro Poblado</option>
+          <ng-container *ngFor="let ce of cenp">
+            <option value="{{ce.codcenp}}">{{ce.descripcion}}</option>
+          </ng-container>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <select class="form-control" (change)="redibujarMarcadores()" #codserv>
+          <option value="00">Servicio</option>
+        </select>
+      </div>
+    </div>
+  </div> -->
+  <div class="row">
+    <div class="col-md-6" style=" height: 77vh; overflow-x: hidden; overflow-y: auto">
+      <ngb-tabset  class="tabset1">
+        <ngb-tab>
+            <ng-template ngbTabTitle>
+              <div (click)="dibujarReportes()">
+                  PNCVFS - CEM
+              </div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <div (click)="void()">
+                <div class="row title-report">
+                    <div class="col-sm-12">
+                      <span class="ubigeo">Peru</span>: Casos atendidos por edad
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div id="cemchart"> 
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row title-report">
+                    <div class="col-sm-12">
+                      <span class="ubigeo">Peru</span>: Casos atendidos por sexo
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div id="cemchartpie"> 
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab title="">
+          <ng-template ngbTabTitle>
+              <div (click)="dibujarReportes()">
+                  PNCVFS - APP
+              </div>
+          </ng-template>  
+          <ng-template ngbTabContent>
+            <div class="row title-report">
+              <div class="col-sm-12">
+                <span class="ubigeo">Peru</span>: Casos atendidos por edad
+              </div>
+            </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="">
+          <ng-template ngbTabTitle>
+            <div (click)="dibujarReportes()">
+              PNCVFS - FEMINICIDIO
+            </div>
+            </ng-template>
+          <ng-template ngbTabContent>
+            <div (click)="void()">
+                <div class="row title-report">
+                  <div class="col-sm-12">
+                    <span class="ubigeo">Peru</span>: Casos atendidos por edad
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div id="femchart"> 
+                    </div>
+                  </div>
+                </div>  
+            </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="PNCVFS - LINEA 100" (click)="dibujarReportes()">
+          <ng-template ngbTabContent>
+            PNCVFS - Linea 100
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+    
+    <div class="col-md-6">
+      <div #gmap style="width:100%; height: 77vh"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <p>view mapa</p>
+    </div>
+  </div>
+  <!-- <router-outlet></router-outlet> -->
+</div>
+<script>
+    $('#navbarMain').hide();
+</script>
