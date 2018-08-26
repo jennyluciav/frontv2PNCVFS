@@ -26,8 +26,9 @@ export class AppComponent implements OnInit{
   @ViewChild('codcenp') codcenp: any;
   @ViewChild('codserv') codserv: any;
   @ViewChild('codano') codano: any;
-  isShow : boolean = true
-  
+
+  isShow: boolean = true;
+
   title = 'app';
   dpto: any;prov:any;dist:any;cenp:any;serv:any;groups: any;ano: any;
   map: google.maps.Map;
@@ -59,12 +60,12 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit () {
-    
+
   }
 
   ngAfterContentInit () {
     this.getDptos();
-    
+
     let mapProp = {
       center: new google.maps.LatLng(-8.559, -73.655),
       zoom: 5,
@@ -113,13 +114,13 @@ export class AppComponent implements OnInit{
       this.dist=[];
       this.cenp=[];
       if(this.coddpto.value=='00'){
-        this.zoomLimitePolitico('00');      
+        this.zoomLimitePolitico('00');
       }else{
         this.zoomLimitePolitico(this.coddpto.value);
       }
       this.getServicios();
     });
-    
+
   }
 
   getDist () {
@@ -129,13 +130,13 @@ export class AppComponent implements OnInit{
       this.dist=data.dist;
       this.cenp=[];
       if(this.codprov.value=='00'){
-        this.zoomLimitePolitico(this.coddpto.value);  
+        this.zoomLimitePolitico(this.coddpto.value);
       }else{
         this.zoomLimitePolitico(this.coddpto.value+this.codprov.value);
       }
       this.getServicios();
     });
-    
+
   }
 
   getCenP () {
@@ -143,13 +144,14 @@ export class AppComponent implements OnInit{
       this.codcenp.value='0000';
       this.cenp=data.cenp;
       if(this.coddist.value=='00'){
-        this.zoomLimitePolitico(this.coddpto.value+this.codprov.value);  
+        this.zoomLimitePolitico(this.coddpto.value+this.codprov.value);
       }else{
         this.zoomLimitePolitico(this.coddpto.value+this.codprov.value+this.coddist.value);
       }
       this.getServicios();
     });
   }
+
   getServicios () {
     this.borrarMarcadores();
     this.desahabilitarSelects();
@@ -157,10 +159,10 @@ export class AppComponent implements OnInit{
       this.serv=data.serv;
       this.datareporte=data.rep;
       this.codserv.value='00';
-      this.habilitarSelects(); 
+      this.habilitarSelects();
       this.redibujarMarcadores();
       let opts = '<option value="00">Servicio</option>';
-      
+
       for(var key in Object.keys(this.groups)){
         opts = opts + '<option value="'+Object.keys(this.groups)[key]+'">'+this.groups[Object.keys(this.groups)[key]]+'</option>';
       }
@@ -170,7 +172,7 @@ export class AppComponent implements OnInit{
       let anos = '';
       if("CEM" in this.datareporte.data_rangos){
         for(let an in this.datareporte.data_periodos.CEM.EDAD){
-          anos = anos + '<option value="'+an+'">'+an+'</option>';          
+          anos = anos + '<option value="'+an+'">'+an+'</option>';
         }
       }else{
         anos = '<option value="00">Año</option>';
@@ -179,6 +181,14 @@ export class AppComponent implements OnInit{
 
       $("#contador").html(data.visitas);
     });
+  }
+
+  showFullMap (){
+    this.isShow = true;
+  }
+
+  hideFullMap () {
+    this.isShow = false;
   }
 
   desahabilitarSelects(){
@@ -209,7 +219,7 @@ export class AppComponent implements OnInit{
       texto=this.codcenp.options[this.codcenp.selectedIndex].text;
 
     $('.ubigeo').html(texto);
-    
+
   }
   redibujarMarcadores () {
     this.borrarMarcadores();
@@ -225,12 +235,12 @@ export class AppComponent implements OnInit{
   }
 
   dibujarMarcadores () {
-    
+
     this.groups={};
 
     for(let serv of this.serv){
       this.groups[serv.servicio]=serv.desserv;
-      
+
       if(serv.servicio!=this.codserv.value && this.codserv.value!='00'){
         continue;
       }
@@ -257,7 +267,7 @@ export class AppComponent implements OnInit{
       '</div>';
       let infowindow = new google.maps.InfoWindow({
         content: contentString
-      });    
+      });
       marker.addListener('click', function() {
         infowindow.open(this.map, marker);
       });
@@ -284,10 +294,10 @@ export class AppComponent implements OnInit{
             position: location,
             title: cp.descripcion
           });
-          this.markers.push(marker); 
-          this.markers.push(center); 
+          this.markers.push(marker);
+          this.markers.push(center);
           this.map.setCenter(location);
-          this.map.setZoom(12);  
+          this.map.setZoom(12);
           break;
         }
       }
@@ -330,7 +340,7 @@ export class AppComponent implements OnInit{
           name: '60+',
           data: Object.values(this.datareporte.data_rangos['CEM']['EDAD']['60+']).map(Number)
         }]
-      };    
+      };
 
       this.cemchart = chart(document.getElementById('cemchart'), options);
 
@@ -370,11 +380,11 @@ export class AppComponent implements OnInit{
           filename: 'reporte-cem-sexo',
           type: 'application/pdf'
         }
-      };    
+      };
       this.cemchartpie = chart(document.getElementById('cemchartpie'), optionspie);
     }
   }
-  
+
   dibujarReportesFEM(){
     if(document.getElementById('femchart')){
       document.getElementById('femchart').innerHTML='<div class="no-data">No se encontro informacion<div>';
@@ -416,7 +426,7 @@ export class AppComponent implements OnInit{
           name: 'Grupo 7',
           data: Object.values(this.datareporte.data_rangos['FEM']['EDAD'][7]?this.datareporte.data_rangos['FEM']['EDAD'][7]:0).map(Number)
         },]
-      };    
+      };
       this.femchart = chart(document.getElementById('femchart'), options);
     }
   }

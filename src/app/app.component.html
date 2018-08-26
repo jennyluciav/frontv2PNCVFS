@@ -8,14 +8,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarMain">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
+        <li class="nav-item" [class.active]="!isShow" (click)="hideFullMap()">
           <a class="nav-link" href="#">
             <img class="icon-1" style="height: 25px;" src="assets/images/grawogrey.png" alt="PNCVFS">
             <img class="icon-2" style="height: 25px;" src="assets/images/grawowhit.png" alt="PNCVFS">
           </a>
         <span class="hidden-sm hidden-md hidden-lg">Ver estadisticas y Mapa</span>
       </li>
-        <li class="nav-item">
+        <li class="nav-item" [class.active]="isShow" (click)="showFullMap()">
           <a class="nav-link" href="#">
             <img class="icon-1" style="height: 25px;" src="assets/images/wogrey.png" alt="PNCVFS">
             <img class="icon-2" style="height: 25px;" src="assets/images/wowhit.png" alt="PNCVFS">
@@ -129,7 +129,7 @@
     </div>
   </div> -->
   <div class="row">
-    <div class="col-md-6" style=" height: 77vh; overflow-x: hidden; overflow-y: auto">
+    <div class="col-md-6" [class.d-none]="isShow" style=" height: 77vh; overflow-x: hidden; overflow-y: auto">
       <ngb-tabset  class="tabset1">
         <ngb-tab>
             <ng-template ngbTabTitle>
@@ -146,7 +146,7 @@
                   </div>
                   <div class="row">
                     <div class="col-sm-12">
-                      <div id="cemchart"> 
+                      <div id="cemchart">
                       </div>
                     </div>
                   </div>
@@ -157,7 +157,7 @@
                   </div>
                   <div class="row">
                     <div class="col-sm-12">
-                      <div id="cemchartpie"> 
+                      <div id="cemchartpie">
                       </div>
                     </div>
                   </div>
@@ -169,7 +169,7 @@
               <div (click)="dibujarReportes()">
                   PNCVFS - APP
               </div>
-          </ng-template>  
+          </ng-template>
           <ng-template ngbTabContent>
             <div class="row title-report">
               <div class="col-sm-12">
@@ -193,10 +193,10 @@
                 </div>
                 <div class="row">
                   <div class="col-sm-12">
-                    <div id="femchart"> 
+                    <div id="femchart">
                     </div>
                   </div>
-                </div>  
+                </div>
             </div>
           </ng-template>
         </ngb-tab>
@@ -207,8 +207,8 @@
         </ngb-tab>
       </ngb-tabset>
     </div>
-    
-    <div class="col-md-6">
+
+    <div [class.col-md-6]="!isShow" [class.col-md-12]="isShow">
       <div #gmap style="width:100%; height: 77vh"></div>
     </div>
   </div>
